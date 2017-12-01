@@ -2,6 +2,6 @@
   "chaos": {
     "enabled": true,
     "timeout": 30,
-    "frequency": 10
+    "probability": 10
   }
 }
