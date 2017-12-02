@@ -1,7 +1,7 @@
 # YEPS Chaos
 
 
-Chaos Monkey implementation for YEPS
+Chaos Monkey implementation for YEPS.
 
 [![NPM](https://nodei.co/npm/yeps-chaos.png)](https://npmjs.org/package/yeps-chaos)
 
@@ -22,7 +22,7 @@ Chaos Monkey implementation for YEPS
 [![GitHub issues](https://img.shields.io/github/issues/evheniy/yeps-chaos.svg)](https://github.com/evheniy/yeps-chaos/issues)
 [![Twitter](https://img.shields.io/twitter/url/https/github.com/evheniy/yeps-chaos.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=%5Bobject%20Object%5D)
 
-    
+  
 ## How to install
 
     npm i -S yeps-chaos
@@ -36,14 +36,20 @@ Chaos Monkey implementation for YEPS
     {
       "chaos": {
         "enabled": true,
-        "timeout": 30,
-        "frequency": 10
+        "error": {
+          "probability": 0.1 // 0..1
+        },
+        "timeout": {
+          "probability": 0.1, // 0..1
+          "time": 30 // seconds
+        }
       }
     }
 
 #### app.js
 
     const App = require('yeps');
+    const error = require('yeps-error');
     
     const chaos = require('yeps-chaos);
     
@@ -51,6 +57,7 @@ Chaos Monkey implementation for YEPS
     
     app.then(chaos());
     
+    app.then(error());
     app.then(...)
     
 
