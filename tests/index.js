@@ -12,7 +12,7 @@ chai.use(chaiHttp);
 let app;
 let server;
 
-describe('YEPS test', () => {
+describe('YEPS chaos test', () => {
   beforeEach(() => {
     app = new App();
     app.then(error());
