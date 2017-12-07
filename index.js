@@ -22,7 +22,7 @@ module.exports = () => async (ctx) => {
 
       const time = parseInt(config.chaos.timeout.time, 10);
       debug('Time:', time);
-      
+
       ctx.res.setHeader('X-Chaos-Timeout', time);
 
       await timeout(time);
@@ -33,7 +33,7 @@ module.exports = () => async (ctx) => {
 
     if (Math.random() <= errorProbability) {
       debug('Chaos error is working...');
-      
+
       ctx.res.setHeader('X-Chaos-Error', 1);
 
       return error();
