@@ -1,6 +1,6 @@
 {
   "name": "yeps-chaos",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "YEPS Chaos Monkey",
   "main": "index.js",
   "scripts": {
@@ -46,7 +46,8 @@
   "dependencies": {
     "config": "^1.28.1",
     "debug": "^3.1.0",
-    "promise-pause-timeout": "^1.0.0"
+    "promise-pause-timeout": "^1.0.0",
+    "yeps-response": "^0.1.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",

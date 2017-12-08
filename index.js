@@ -1,5 +1,6 @@
 const debug = require('debug')('yeps:chaos:index');
 const config = require('config');
+const Response = require('yeps-response/response');
 
 const { timeout, error } = require('./chaos');
 
@@ -36,7 +37,9 @@ module.exports = () => async (ctx) => {
 
       ctx.res.setHeader('X-Chaos-Error', 1);
 
-      return error();
+      const response = new Response(ctx);
+
+      return response.resolve(error());
     }
   }
 
