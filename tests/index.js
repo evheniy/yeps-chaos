@@ -2,7 +2,6 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const App = require('yeps');
 const srv = require('yeps-server');
-const error = require('yeps-error');
 const config = require('config');
 const chaos = require('..');
 
@@ -15,7 +14,6 @@ let server;
 describe('YEPS chaos test', () => {
   beforeEach(() => {
     app = new App();
-    app.then(error());
     server = srv.createHttpServer(app);
   });
 
@@ -48,17 +46,43 @@ describe('YEPS chaos test', () => {
   });
 
   it('should test enable with error', async () => {
-    let isTestFinished1 = false;
-    let isTestFinished2 = false;
+    let isTestFinished = false;
 
     config.chaos.enabled = true;
     config.chaos.timeout.probability = 0;
     config.chaos.error.probability = 1;
 
     app.then(chaos());
-    app.then(async (ctx) => {
+
+    await chai.request(server)
+      .get('/')
+      .send()
+      .catch((err) => {
+        expect(err).to.have.status(500);
+        expect(err.response.headers['x-chaos']).to.be.equal('1');
+        expect(err.response.headers['x-chaos-error']).to.be.equal('1');
+        expect(err.response.text).to.be.equal('Chaos');
+        isTestFinished = true;
+      });
+
+    expect(isTestFinished).is.true;
+  });
+
+  it('should test enable with error and response', async () => {
+    let isTestFinished1 = false;
+    let isTestFinished2 = false;
+    let isTestFinished3 = false;
+
+    config.chaos.enabled = true;
+    config.chaos.timeout.probability = 0;
+    config.chaos.error.probability = 1;
+
+    app.then(chaos());
+    app.then(async () => {
       isTestFinished1 = true;
-      ctx.res.end();
+    });
+    app.catch(async () => {
+      isTestFinished2 = true;
     });
 
     await chai.request(server)
@@ -69,11 +93,12 @@ describe('YEPS chaos test', () => {
         expect(err.response.headers['x-chaos']).to.be.equal('1');
         expect(err.response.headers['x-chaos-error']).to.be.equal('1');
         expect(err.response.text).to.be.equal('Chaos');
-        isTestFinished2 = true;
+        isTestFinished3 = true;
       });
 
     expect(isTestFinished1).is.false;
-    expect(isTestFinished2).is.true;
+    expect(isTestFinished2).is.false;
+    expect(isTestFinished3).is.true;
   });
 
   it('should test enable with timeout', async () => {
