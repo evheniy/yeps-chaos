@@ -67,6 +67,7 @@ describe('YEPS chaos test', () => {
       .catch((err) => {
         expect(err).to.have.status(500);
         expect(err.response.headers['x-chaos']).to.be.equal('1');
+        expect(err.response.headers['x-chaos-error']).to.be.equal('1');
         expect(err.response.text).to.be.equal('Chaos');
         isTestFinished2 = true;
       });
@@ -96,6 +97,7 @@ describe('YEPS chaos test', () => {
       .then((res) => {
         expect(res).to.have.status(200);
         expect(res.headers['x-chaos']).to.be.equal('1');
+        expect(res.headers['x-chaos-timeout']).to.be.equal('1');
         isTestFinished2 = true;
       });
 

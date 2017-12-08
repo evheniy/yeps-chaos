@@ -14,7 +14,7 @@ module.exports = () => async (ctx) => {
   if (enabled) {
     ctx.res.setHeader('X-Chaos', 1);
 
-    const timeoutProbability = parseInt(config.chaos.timeout.probability, 10);
+    const timeoutProbability = parseFloat(config.chaos.timeout.probability);
     debug('Timeout probability:', timeoutProbability);
 
     if (Math.random() <= timeoutProbability) {
@@ -28,7 +28,7 @@ module.exports = () => async (ctx) => {
       await timeout(time);
     }
 
-    const errorProbability = parseInt(config.chaos.error.probability, 10);
+    const errorProbability = parseFloat(config.chaos.error.probability);
     debug('Error probability:', errorProbability);
 
     if (Math.random() <= errorProbability) {
