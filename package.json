@@ -1,6 +1,6 @@
 {
   "name": "yeps-chaos",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "YEPS Chaos Monkey",
   "main": "index.js",
   "scripts": {

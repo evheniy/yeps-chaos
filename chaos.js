@@ -3,7 +3,7 @@ const pause = require('promise-pause-timeout');
 
 debug('Chaos kernel created');
 
-const timeout = delay => pause(delay);
+const timeout = delay => pause(delay * 1000);
 
 const error = () => Promise.reject(new Error('Chaos'));
 
