@@ -39,7 +39,7 @@ module.exports = () => async (ctx) => {
 
       const response = new Response(ctx);
 
-      return response.resolve(error());
+      return response.reject(error());
     }
   }
 

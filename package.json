@@ -1,6 +1,6 @@
 {
   "name": "yeps-chaos",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "YEPS Chaos Monkey",
   "main": "index.js",
   "scripts": {
@@ -47,13 +47,13 @@
     "config": "^1.28.1",
     "debug": "^3.1.0",
     "promise-pause-timeout": "^1.0.0",
-    "yeps-response": "^0.1.1"
+    "yeps-response": "^0.2.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
     "chai-http": "^3.0.0",
     "coveralls": "^3.0.0",
-    "eslint": "^4.12.1",
+    "eslint": "^4.13.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
     "husky": "^0.14.3",
